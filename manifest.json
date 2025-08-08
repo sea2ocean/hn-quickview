@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "HN Quick View",
+  "version": "1.1",
+  "description": "View Hacker News top or new stories from the toolbar popup.",
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "https://hacker-news.firebaseio.com/*",
+    "https://news.ycombinator.com/*"
+  ]
+}

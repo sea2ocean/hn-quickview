@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="popup.css" />
+  <title>HN Quick View</title>
+</head>
+<body>
+  <header>
+    <div id="tabs">
+      <button data-feed="top" class="active">Top</button>
+      <button data-feed="new">New</button>
+    </div>
+    <button id="refresh" title="Refresh">⟳</button>
+  </header>
+
+  <div id="status">Loading…</div>
+  <ul id="stories"></ul>
+
+  <script src="popup.js"></script>
+</body>
+</html>
