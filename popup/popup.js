@@ -47,6 +47,7 @@ function renderStories(items) {
     const li = document.createElement('li');
     li.className = 'story';
 
+    // Title link
     const titleLink = document.createElement('a');
     titleLink.className = 'title';
     titleLink.textContent = item.title || '(no title)';
@@ -54,13 +55,25 @@ function renderStories(items) {
     titleLink.target = '_blank';
     titleLink.rel = 'noopener noreferrer';
 
+    // Meta info
     const meta = document.createElement('div');
     meta.className = 'meta';
     const comments = item.descendants ? `${item.descendants} comments` : '0 comments';
     meta.textContent = `${item.score || 0} pts — by ${item.by || 'unknown'} — ${timeAgo(item.time)} — ${comments}`;
 
+    // Comments link
+    const commentsLink = document.createElement('a');
+    commentsLink.href = `https://news.ycombinator.com/item?id=${item.id}`;
+    commentsLink.textContent = comments;
+    commentsLink.target = '_blank';
+    commentsLink.rel = 'noopener noreferrer';
+    commentsLink.style.marginLeft = '5px';
+
+    // Append elements
     li.appendChild(titleLink);
+    meta.appendChild(commentsLink);
     li.appendChild(meta);
+
     storiesEl.appendChild(li);
   });
 }
