@@ -12,6 +12,9 @@ html, body {
   background: var(--bg);
   color: #111;
   width: var(--max-width);
+  height: 600px;         /* Add this line */
+  overflow: hidden;      /* Already present */
+  box-sizing: border-box;/* Add for safety */
 }
 
 header {
@@ -54,11 +57,11 @@ header {
 }
 
 #stories {
-  list-style: none;
-  margin: 0;
-  padding: 8px 10px 12px 10px;
-  max-height: 520px;
+  max-height: 480px;     /* Adjust this value as needed */
   overflow-y: auto;
+  margin: 0;
+  padding: 0 10px;
+  list-style: none;
 }
 
 .story {
@@ -78,4 +81,35 @@ header {
   font-size: 12px;
   color: var(--muted);
   margin-top: 4px;
+}
+
+/* ...existing code... */
+
+#load-more {
+  display: block;
+  margin: 12px auto 8px auto;
+  padding: 5px 16px;
+  background: #ff6600;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: .95em;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+#load-more:hover, #load-more:focus {
+  background: #ff8533;
+  outline: none;
+}
+
+/* Highlight animation for new items */
+.story.newly-fetched {
+  animation: highlight-fade 2s;
+  background: #fffbe6;
+}
+@keyframes highlight-fade {
+  0%   { background: #fffbe6; }
+  80%  { background: #fffbe6; }
+  100% { background: transparent; }
 }

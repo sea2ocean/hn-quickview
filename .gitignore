@@ -1,1 +1,3 @@
 *.zip
+# macOS system files
+.DS_Store
