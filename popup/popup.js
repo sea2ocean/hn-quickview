@@ -9,7 +9,7 @@ const statusEl = document.getElementById('status');
 const storiesEl = document.getElementById('stories');
 const refreshBtn = document.getElementById('refresh');
 const tabButtons = document.querySelectorAll('#tabs button');
-const loadMoreBtn = document.getElementById('load-more'); // Add this line
+const loadMoreBtn = document.getElementById('load-more');
 
 refreshBtn.addEventListener('click', () => {
   currentIndex = 0;
@@ -56,11 +56,19 @@ function renderStories(items, append = false) {
   }
   statusEl.textContent = '';
   const existingIds = new Set(Array.from(storiesEl.querySelectorAll('li')).map(li => li.dataset.id));
-  items.forEach(item => {
+  items.forEach((item, idx) => {
     if (!item) return;
     const li = document.createElement('li');
     li.className = 'story';
     li.dataset.id = item.id; // For deduplication
+
+    // News number (global index)
+    const headerDiv = document.createElement('div');
+    headerDiv.className = 'story-header';
+
+    const numberSpan = document.createElement('span');
+    numberSpan.className = 'story-number';
+    numberSpan.textContent = `${currentIndex + idx + 1}. `;
 
     // Highlight if newly fetched (when appending)
     if (append && !existingIds.has(String(item.id))) {
@@ -75,6 +83,26 @@ function renderStories(items, append = false) {
     titleLink.href = item.url || `https://news.ycombinator.com/item?id=${item.id}`;
     titleLink.target = '_blank';
     titleLink.rel = 'noopener noreferrer';
+
+    // Source domain
+    let domain = '';
+    if (item.url) {
+      try {
+        domain = new URL(item.url).hostname.replace(/^www\./, '');
+      } catch {}
+    }
+    if (domain) {
+      const domainSpan = document.createElement('span');
+      domainSpan.className = 'source-domain';
+      domainSpan.textContent = ` (${domain})`;
+      domainSpan.style.color = '#888';
+      domainSpan.style.fontSize = '12px';
+      titleLink.appendChild(domainSpan);
+    }
+
+    headerDiv.appendChild(numberSpan);
+    headerDiv.appendChild(titleLink);
+    li.appendChild(headerDiv);
 
     // Meta info
     const meta = document.createElement('div');
@@ -91,7 +119,6 @@ function renderStories(items, append = false) {
     commentsLink.style.marginLeft = '5px';
 
     // Append elements
-    li.appendChild(titleLink);
     meta.appendChild(commentsLink);
     li.appendChild(meta);
 

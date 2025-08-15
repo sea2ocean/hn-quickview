@@ -12,9 +12,9 @@ html, body {
   background: var(--bg);
   color: #111;
   width: var(--max-width);
-  height: 600px;         /* Add this line */
-  overflow: hidden;      /* Already present */
-  box-sizing: border-box;/* Add for safety */
+  height: 600px;         
+  overflow: hidden;      
+  box-sizing: border-box;
 }
 
 header {
@@ -57,24 +57,45 @@ header {
 }
 
 #stories {
-  max-height: 480px;     /* Adjust this value as needed */
+  max-height: 480px;
   overflow-y: auto;
   margin: 0;
-  padding: 0 10px;
+  padding: 0 4px 0 2px;
   list-style: none;
 }
 
 .story {
   padding: 8px 0;
   border-bottom: 1px solid #f3f3f3;
+  display: flex;
+  flex-direction: column;
+}
+
+.story-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
 }
 
 .story a.title {
-  display: block;
+  display: inline;
   font-weight: 600;
   font-size: 13px;
   text-decoration: none;
   color: #111;
+  line-height: 1.2;
+  word-break: break-word;
+  flex: 1 1 0%;
+}
+
+.story-number {
+  color: #ff6600;
+  margin-right: 4px;
+  font-size: 13px;
+  flex-shrink: 0;
+  line-height: 1.2;
+  text-align: right;
+  padding: 0 1px 0 1px;
 }
 
 .meta {
@@ -82,8 +103,6 @@ header {
   color: var(--muted);
   margin-top: 4px;
 }
-
-/* ...existing code... */
 
 #load-more {
   display: block;
