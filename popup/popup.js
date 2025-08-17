@@ -56,19 +56,11 @@ function renderStories(items, append = false) {
   }
   statusEl.textContent = '';
   const existingIds = new Set(Array.from(storiesEl.querySelectorAll('li')).map(li => li.dataset.id));
-  items.forEach((item, idx) => {
+  items.forEach((item) => {
     if (!item) return;
     const li = document.createElement('li');
     li.className = 'story';
     li.dataset.id = item.id; // For deduplication
-
-    // News number (global index)
-    const headerDiv = document.createElement('div');
-    headerDiv.className = 'story-header';
-
-    const numberSpan = document.createElement('span');
-    numberSpan.className = 'story-number';
-    numberSpan.textContent = `${currentIndex + idx + 1}. `;
 
     // Highlight if newly fetched (when appending)
     if (append && !existingIds.has(String(item.id))) {
@@ -100,10 +92,6 @@ function renderStories(items, append = false) {
       titleLink.appendChild(domainSpan);
     }
 
-    headerDiv.appendChild(numberSpan);
-    headerDiv.appendChild(titleLink);
-    li.appendChild(headerDiv);
-
     // Meta info
     const meta = document.createElement('div');
     meta.className = 'meta';
@@ -119,6 +107,7 @@ function renderStories(items, append = false) {
     commentsLink.style.marginLeft = '5px';
 
     // Append elements
+    li.appendChild(titleLink);
     meta.appendChild(commentsLink);
     li.appendChild(meta);
 
